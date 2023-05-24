@@ -91,9 +91,9 @@ fetch first 100 rows only
 
 select po.PurchaseOrderID, d.DeliveryMethodName, po.ExpectedDeliveryDate, s.SupplierName, p.PreferredName as ContactPerson 
 from Purchasing.PurchaseOrders po
-left join Purchasing.Suppliers s on s.SupplierID=po.SupplierID
-left join Application.DeliveryMethods d on d.DeliveryMethodID=po.DeliveryMethodID
-left join Application.People p on p.PersonID=po.ContactPersonID
+inner join Purchasing.Suppliers s on s.SupplierID=po.SupplierID
+inner join Application.DeliveryMethods d on d.DeliveryMethodID=po.DeliveryMethodID
+inner join Application.People p on p.PersonID=po.ContactPersonID
 where po.ExpectedDeliveryDate between '2013-01-01' and '2013-01-31' and d.DeliveryMethodName in ('Air Freight', 'Refrigerated Air Freight')
 
 /*
@@ -115,8 +115,8 @@ order by OrderDate desc
 */
 
 select distinct o.CustomerID, c.CustomerName, c.PhoneNumber from sales.Orders o
-left join sales.OrderLines ol on ol.OrderID=o.OrderID
-left join Warehouse.StockItems si on si.StockItemID=ol.StockItemID
-left join sales.Customers c on c.CustomerID=o.CustomerID
+inner join sales.OrderLines ol on ol.OrderID=o.OrderID
+inner join Warehouse.StockItems si on si.StockItemID=ol.StockItemID
+inner join sales.Customers c on c.CustomerID=o.CustomerID
 where si.StockItemName = 'Chocolate frogs 250g'
 
